@@ -1,8 +1,22 @@
 import "./Buttons.css";
-import buttonArr from "../../utils/buttonArr.json"
+import buttonArr from "../../utils/data/buttonArr.json"
 
-export default function Buttons() {
+export default function Buttons({setCurrentOperation, currentOperation}) {
 
+
+function handleClick(e) {
+
+    if (isNaN(e.target.value) && 
+    e.target.value === currentOperation[currentOperation.length - 1]) {
+        return
+    }
+
+    if (e.target.value === "AC") {
+        return setCurrentOperation("")
+    }
+
+    setCurrentOperation( lastOperation => lastOperation + e.target.value)
+}
     return (
         <div className="button-grid">
             {buttonArr.map( button => {
@@ -27,14 +41,17 @@ export default function Buttons() {
                     case("x"):
                     betterName = "multiply";
                     break;
-                    
+                    default:
+                        betterName = null;
                 }
 
 
                 return (
                     <button 
                     className={betterName ? `operator btn ${betterName}` : `btn btn${button}`} 
-                    key={button}>
+                    key={button}
+                    value={(button === "x") ? "*" : button}
+                    onClick={handleClick}>
                     {button}
                     </button>
                 )

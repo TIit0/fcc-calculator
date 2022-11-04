@@ -1,11 +1,15 @@
 import "./Screen.css";
 
-export default function Screen() {
+export default function Screen({ currentOperation, result, setCurrentOperation }) {
+    const formula = currentOperation ? currentOperation.replace("*", "x") : "0";
+
 
     return (
         <>
-            <div className="formula-screen">2</div>
-            <div className="output">8</div>
+            <div className="formula-screen">
+                {formula}
+            </div>
+            <div className="output">{result}</div>
         </>
     )
 }

@@ -1,3 +1,18 @@
+@import 'https://fonts.googleapis.com/css?family=Share+Tech+Mono';
+
+@font-face {
+    font-family: 'Digital';
+    src: url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.eot');
+    src: url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.eot?#iefix') format('embedded-opentype'),
+        url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.woff2') format('woff2'),
+        url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.woff') format('woff'),
+        url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.ttf') format('truetype'),
+        url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.svg#Digital-7') format('svg');
+}
+
+
+
+
 
 .button-grid {
     background-color: white;
@@ -6,12 +21,21 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    
+
 }
 
 .btn {
     background-color: #4D4D4D;
     color: white;
+    border: 1px solid black;
+    font-family: Share Tech Mono, monospace;
+    font-size: 2rem;
+}
+
+.btn:hover {
+    border: 1px solid rgb(206, 205, 205);
+    color: black;
+    transform: scale(1.01)
 }
 
 .operator {
