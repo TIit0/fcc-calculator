@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function Calculator() {
 
     const [currentOperation, setCurrentOperation] = useState("");
+    const [prev, setPrev] = useState("")
     
     let result;
     let lastOne;
@@ -44,12 +45,18 @@ export default function Calculator() {
             }
         }
         if (!Number.isInteger(result)) {
-            result = result.toFixed(2)
+            result = result.toFixed(2);
+            const string = result.toString()
+            if( string[string.length - 1] === "0") {
+                result = parseFloat(result)
+                result = result.toFixed(1)
+            }
+            
         }
-
+        
         lastOne = regexCalc[regexCalc.length - 1];
-        if ((regexCalc[regexCalc.length - 2]) === "=") {
-            setCurrentOperation(result + lastOne)
+        if ((regexCalc[regexCalc.length - 1]) === "=") {
+        setCurrentOperation(result.toString())
         }
     }
 
