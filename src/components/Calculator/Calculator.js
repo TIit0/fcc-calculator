@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Calculator() {
 
     const [currentOperation, setCurrentOperation] = useState("");
-    const [prev, setPrev] = useState("")
+    const [greenLight, setGreenLight] = useState(false)
     
     let result;
     let lastOne;
@@ -55,12 +55,16 @@ export default function Calculator() {
         }
         
         lastOne = regexCalc[regexCalc.length - 1];
+        
+
         if ((regexCalc[regexCalc.length - 1]) === "=") {
-        setCurrentOperation(result.toString())
+        setGreenLight(true)
+        setCurrentOperation(result.toString());
         }
     }
 
     result = result ? result : "0";
+    console.log(greenLight)
 
     return (
         <div className="Calculator">
@@ -72,7 +76,9 @@ export default function Calculator() {
 
             <Buttons
                 currentOperation={currentOperation}
-                setCurrentOperation={setCurrentOperation} />
+                setCurrentOperation={setCurrentOperation} 
+                greenLight={greenLight}
+                setGreenLight={setGreenLight}/>
         </div>
     )
 }
