@@ -1,7 +1,7 @@
 import "./Screen.css";
 
 export default function Screen({ currentOperation, result, setCurrentOperation, lastOne }) {
-
+console.warn(lastOne)
     
 
 let output;

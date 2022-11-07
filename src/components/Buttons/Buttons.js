@@ -6,7 +6,6 @@ export default function Buttons({setCurrentOperation, currentOperation,greenLigh
 
 function handleClick(e) {
 
-console.warn(isNaN(e.target.value))
     if (isNaN(e.target.value) && 
     e.target.value === currentOperation[currentOperation.length - 1]) {
         return
@@ -19,12 +18,12 @@ console.warn(isNaN(e.target.value))
     if (greenLight) {
         if(!isNaN(e.target.value)) {
             console.warn("INSIDE")
-            setGreenLight(false)
+            setGreenLight(false);
         return setCurrentOperation("");
         } else {
             console.warn("ELSE")
-            setGreenLight(false)
-            return setCurrentOperation( lastOperation => lastOperation + e.target.value)
+            setGreenLight(false);
+            return setCurrentOperation( lastOperation => lastOperation + e.target.value);
         }
     }
 

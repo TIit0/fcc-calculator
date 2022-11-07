@@ -7,7 +7,7 @@ export default function Calculator() {
 
     const [currentOperation, setCurrentOperation] = useState("");
     const [greenLight, setGreenLight] = useState(false)
-    
+
     let result;
     let lastOne;
 
@@ -19,12 +19,12 @@ export default function Calculator() {
         console.log(regexCalc)
 
         for (let i = 0; i < regexCalc.length; i++) {
-            
+
             if (i === 0) {
                 result = parseFloat(regexCalc[i]);
                 console.log(result)
             } else {
-                
+
                 if (!isNaN(regexCalc[i])) {
                     switch (regexCalc[i - 1]) {
                         case ("-"):
@@ -39,7 +39,7 @@ export default function Calculator() {
                         case ("/"):
                             result /= parseFloat(regexCalc[i]);
                             break;
-                        
+
                     }
                 }
             }
@@ -47,24 +47,25 @@ export default function Calculator() {
         if (!Number.isInteger(result)) {
             result = result.toFixed(2);
             const string = result.toString()
-            if( string[string.length - 1] === "0") {
+            if (string[string.length - 1] === "0") {
                 result = parseFloat(result)
                 result = result.toFixed(1)
             }
-            
+
         }
-        
+
         lastOne = regexCalc[regexCalc.length - 1];
-        
+
 
         if ((regexCalc[regexCalc.length - 1]) === "=") {
-        setGreenLight(true)
-        setCurrentOperation(result.toString());
+            console.warn(currentOperation, "BEFORE")
+            setGreenLight(true)
+            setCurrentOperation(result.toString());
         }
+        console.warn(currentOperation, "AFTER")
     }
 
     result = result ? result : "0";
-    console.log(greenLight)
 
     return (
         <div className="Calculator">
@@ -76,9 +77,9 @@ export default function Calculator() {
 
             <Buttons
                 currentOperation={currentOperation}
-                setCurrentOperation={setCurrentOperation} 
+                setCurrentOperation={setCurrentOperation}
                 greenLight={greenLight}
-                setGreenLight={setGreenLight}/>
+                setGreenLight={setGreenLight} />
         </div>
     )
 }
