@@ -19,9 +19,13 @@ export default function Calculator() {
         const regexCalc = currentOperation.match(/\d+\.\d+|\d+|\-\d+|\d+|[^0-9]/g);
         console.log(regexCalc, "REGEX")
 
+        
+        // if ( regexCalc.includes("*") || regexCalc.includes("/")) {
+            
+        // }
         for (let i = 0; i < regexCalc.length; i++) {
 
-            console.error(regexCalc[i])
+            console.error(regexCalc[i], "REGEX CALC [i]")
             if (i === 0) {
                 result = parseFloat(regexCalc[i]);
                 console.log(result, "ParseFloat")
@@ -33,22 +37,23 @@ export default function Calculator() {
                     -1)) {
                         result += parseFloat(regexCalc[i]);
                         console.warn(result, "NEGATIVE RESULT")
+                        console.error(regexCalc[i - 1], regexCalc[i])
                         console.warn(regexCalc, "NEGATIVE CALC")
                     }
 
                 if (!isNaN(regexCalc[i])) {
                     switch (regexCalc[i - 1]) {
                         case ("*"):
-                            result -= parseFloat(regexCalc[i]);
-                            break;
-                        case ("/"):
-                            result += parseFloat(regexCalc[i]);
-                            break;
-                        case ("+"):
                             result *= parseFloat(regexCalc[i]);
                             break;
-                        case ("-"):
+                        case ("/"):
                             result /= parseFloat(regexCalc[i]);
+                            break;
+                        case ("+"):
+                            result += parseFloat(regexCalc[i]);
+                            break;
+                        case ("-"):
+                            result -= parseFloat(regexCalc[i]);
                             break;
 
                     }
