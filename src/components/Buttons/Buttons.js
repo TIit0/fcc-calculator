@@ -1,7 +1,7 @@
 import "./Buttons.css";
 import buttonArr from "../../utils/data/buttonArr.json"
 
-export default function Buttons({setCurrentOperation, currentOperation,greenLight, setGreenLight}) {
+export default function Buttons({setCurrentOperation, currentOperation,greenLight, setGreenLight, setHistory}) {
 
 
 function handleClick(e) {
@@ -12,6 +12,7 @@ function handleClick(e) {
     }
 
     if (e.target.value === "AC") {
+        setHistory("")
         return setCurrentOperation("");
     } 
 
@@ -19,14 +20,19 @@ function handleClick(e) {
         if(!isNaN(e.target.value)) {
             console.warn("INSIDE")
             setGreenLight(false);
+            setHistory("")
         return setCurrentOperation("");
         } else {
             console.warn("ELSE")
             setGreenLight(false);
-            return setCurrentOperation( lastOperation => lastOperation + e.target.value);
+            setHistory(pastHistory => pastHistory + e.target.value)
+            return setCurrentOperation( lastOperation => {
+                return lastOperation + e.target.value
+            });
         }
     }
 
+    setHistory(pastHistory => pastHistory + e.target.value)
     setCurrentOperation( lastOperation => lastOperation + e.target.value)
 }
     return (

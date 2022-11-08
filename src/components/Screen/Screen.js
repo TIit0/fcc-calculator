@@ -1,12 +1,12 @@
 import "./Screen.css";
 
-export default function Screen({ currentOperation, result, setCurrentOperation, lastOne }) {
-console.warn(lastOne)
-    
+export default function Screen({ currentOperation, result, setCurrentOperation, lastOne, history }) {
+
+    console.log(currentOperation, "SCREEN CURRENT OP")
 
 let output;
 
-    const formula = currentOperation ? currentOperation.replace("*", "x") : "0";
+    const formula = history ? history.replace("*", "x") : "0";
     
     if ( currentOperation[currentOperation.length -1] === "=") {
         output = result;

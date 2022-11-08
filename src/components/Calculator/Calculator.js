@@ -6,7 +6,8 @@ import { useState } from "react";
 export default function Calculator() {
 
     const [currentOperation, setCurrentOperation] = useState("");
-    const [greenLight, setGreenLight] = useState(false)
+    const [greenLight, setGreenLight] = useState(false);
+    const [history, setHistory] = useState("");
 
     let result;
     let lastOne;
@@ -15,28 +16,38 @@ export default function Calculator() {
     if (currentOperation) {
         /* detect negative \d+\.\d+|\d+|\-\d+|\d+|[^0-9] */
         /* normal \d+\.\d+|\d+|[^0-9] */
-        const regexCalc = currentOperation.match(/\d+\.\d+|\d+|[^0-9]/g);
-        console.log(regexCalc)
+        const regexCalc = currentOperation.match(/\d+\.\d+|\d+|\-\d+|\d+|[^0-9]/g);
+        console.log(regexCalc, "REGEX")
 
         for (let i = 0; i < regexCalc.length; i++) {
 
+            console.error(regexCalc[i])
             if (i === 0) {
                 result = parseFloat(regexCalc[i]);
-                console.log(result)
+                console.log(result, "ParseFloat")
             } else {
+
+                if (
+                    (Math.sign(regexCalc[i - 1]) &&
+                    Math.sign(regexCalc[i]) ===
+                    -1)) {
+                        result += parseFloat(regexCalc[i]);
+                        console.warn(result, "NEGATIVE RESULT")
+                        console.warn(regexCalc, "NEGATIVE CALC")
+                    }
 
                 if (!isNaN(regexCalc[i])) {
                     switch (regexCalc[i - 1]) {
-                        case ("-"):
+                        case ("*"):
                             result -= parseFloat(regexCalc[i]);
                             break;
-                        case ("+"):
+                        case ("/"):
                             result += parseFloat(regexCalc[i]);
                             break;
-                        case ("*"):
+                        case ("+"):
                             result *= parseFloat(regexCalc[i]);
                             break;
-                        case ("/"):
+                        case ("-"):
                             result /= parseFloat(regexCalc[i]);
                             break;
 
@@ -55,15 +66,23 @@ export default function Calculator() {
         }
 
         lastOne = regexCalc[regexCalc.length - 1];
+        console.log(lastOne, "LastOne")
 
-
-        if ((regexCalc[regexCalc.length - 1]) === "=") {
-            console.warn(currentOperation, "BEFORE")
+        if ((lastOne) === "=") {
+            console.warn(currentOperation, "CURRENT OP BEFORE")
+            setHistory(currentOperation)
             setGreenLight(true)
             setCurrentOperation(result.toString());
         }
-        console.warn(currentOperation, "AFTER")
+        console.warn(currentOperation, "CURRENT OP AFTER")
+        console.warn(history, "History AFTER")
+
+        if (history[history.length - 2] === "=") {
+            setHistory(currentOperation);
+        }
     }
+
+
 
     result = result ? result : "0";
 
@@ -73,13 +92,15 @@ export default function Calculator() {
                 currentOperation={currentOperation}
                 setCurrentOperation={setCurrentOperation}
                 result={result}
-                lastOne={lastOne} />
+                lastOne={lastOne}
+                history={history} />
 
             <Buttons
                 currentOperation={currentOperation}
                 setCurrentOperation={setCurrentOperation}
                 greenLight={greenLight}
-                setGreenLight={setGreenLight} />
+                setGreenLight={setGreenLight}
+                setHistory={setHistory} />
         </div>
     )
 }
