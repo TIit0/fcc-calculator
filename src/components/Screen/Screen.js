@@ -14,7 +14,7 @@ let output;
         output = lastOne;
     }
 
-
+console.error(lastOne, "SCREEEEN")
 
 
     return (
