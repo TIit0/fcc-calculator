@@ -11,17 +11,16 @@ export default function Calculator() {
     const [history, setHistory] = useState("");
 
     let result = currentOperation ? currentOperation : "";
-    const regexCalc = currentOperation.match(/\d+\.\d+|\d+|[^0-9]/g);
+    const regexCalc = currentOperation.match(/\d+\.\d+|\d+|\-\d+|\d+|[^0-9]/g);
     let lastOne = regexCalc ? regexCalc[regexCalc.length - 1] : null;
 
-        
+        console.warn(regexCalc)
     if (currentOperation && currentOperation.includes("=")) {
         /* detect negative \d+\.\d+|\d+|\-\d+|\d+|[^0-9] */
         /* normal \d+\.\d+|\d+|[^0-9] */
 
         // if(result = operationOrder(regexCalc)) 
         result = operationOrder(regexCalc)
-        console.warn(operationOrder("70"))
         console.log(result, "FUNC RESULT")
         
 
@@ -33,7 +32,6 @@ export default function Calculator() {
                 result = parseFloat(result)
                 result = result.toFixed(1)
             }
-
         }
 
         
@@ -47,8 +45,6 @@ export default function Calculator() {
         }
         console.warn(currentOperation, "CURRENT OP AFTER")
         console.warn(history, "History AFTER")
-
-        
     }
 
     
