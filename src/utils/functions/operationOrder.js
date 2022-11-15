@@ -8,6 +8,7 @@ export default function operationOrder(regexCalc) {
     if (!regexCalc.includes("=")) return regexCalc.toString();
 
 
+
     const arrCopy = [...regexCalc]
     console.log(arrCopy, "ARR COPY")
 
@@ -16,6 +17,7 @@ export default function operationOrder(regexCalc) {
         let index = arrCopy.indexOf("*")
         calculation = parseFloat(arrCopy[index - 1]) * parseFloat(arrCopy[index + 1]);
         arrCopy.splice(index - 1, 3, calculation)
+        if (arrCopy.includes(NaN)) return NaN
         console.log(arrCopy, "AFTER SPLICE")
         console.log(calculation, "CALCULATION *")
         return operationOrder(arrCopy);
@@ -23,7 +25,8 @@ export default function operationOrder(regexCalc) {
     if (arrCopy.includes("/")) {
         let index = arrCopy.indexOf("/")
         calculation = parseFloat(arrCopy[index - 1]) / parseFloat(arrCopy[index + 1]);
-        arrCopy.splice(index - 1, 3, calculation)
+        arrCopy.splice(index - 1, 3, calculation);
+        if (arrCopy.includes(NaN)) return NaN
         console.log(arrCopy, "AFTER SPLICE")
         console.log(calculation, "CALCULATION /")
         return operationOrder(arrCopy);
@@ -31,15 +34,15 @@ export default function operationOrder(regexCalc) {
     if (arrCopy.includes("+")) {
         let index = arrCopy.indexOf("+")
         calculation = parseFloat(arrCopy[index - 1]) + parseFloat(arrCopy[index + 1]);
-        arrCopy.splice(index - 1, 3, calculation)
-        console.log(arrCopy, "AFTER SPLICE")
-        console.log(calculation, "CALCULATION +")
+        arrCopy.splice(index - 1, 3, calculation);
+        if (arrCopy.includes(NaN)) return NaN /* only op here due to + operator bheiviour with strings and nums */
         return operationOrder(arrCopy);
     }
     if (arrCopy.includes("-")) {
         let index = arrCopy.indexOf("-")
         calculation = parseFloat(arrCopy[index - 1]) - parseFloat(arrCopy[index + 1]);
         arrCopy.splice(index - 1, 3, calculation.toString())
+        if (arrCopy.includes(NaN)) return NaN
         console.log(arrCopy, "AFTER SPLICE")
         console.log(calculation, "CALCULATION -")
         return operationOrder(arrCopy);

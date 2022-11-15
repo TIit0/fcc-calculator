@@ -22,10 +22,11 @@ export default function Calculator() {
         // if(result = operationOrder(regexCalc)) 
         result = operationOrder(regexCalc)
         console.log(result, "FUNC RESULT")
+
         
 
-
-        if (!Number.isInteger(result)) {
+        
+        if (!Number.isInteger(result) && isNaN(result)) {
             result = result.toFixed(2);
             const string = result.toString()
             if (string[string.length - 1] === "0") {

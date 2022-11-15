@@ -12,12 +12,11 @@ console.log(Math.sign(currentOperation) == -1)
         if(Math.sign(currentOperation) == -1) {
             output = result;
         } else {
-            output = lastOne;
+
+            output = lastOne === "N" ? "NaN" : lastOne;
         }
     
         
-    
-    console.log()
     
 
 
