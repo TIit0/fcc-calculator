@@ -1,6 +1,6 @@
 import "./Screen.css";
 
-export default function Screen({ currentOperation, result, setCurrentOperation, lastOne, history }) {
+export default function Screen({ currentOperation, result, setCurrentOperation, LastInput, history }) {
 
     console.log(currentOperation, "SCREEN CURRENT OP")
 let output;
@@ -12,15 +12,14 @@ console.log(Math.sign(currentOperation) == -1)
         if(Math.sign(currentOperation) == -1) {
             output = result;
         } else {
-
-            output = lastOne === "N" ? "NaN" : lastOne;
+            output = LastInput === "N" ? "NaN" : LastInput;
         }
     
         
     
 
 
-console.error(lastOne, "SCREEEEN")
+console.error(LastInput, "SCREEEEN")
 
 
     return (

@@ -20,8 +20,8 @@ function handleClick(e) {
         if(!isNaN(e.target.value)) {
             console.warn("INSIDE")
             setGreenLight(false);
-            setHistory("")
-        return setCurrentOperation("");
+            setHistory(e.target.value)
+        return setCurrentOperation(e.target.value);
         } else {
             console.warn("ELSE")
             setGreenLight(false);

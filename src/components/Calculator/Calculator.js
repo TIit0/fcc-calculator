@@ -10,14 +10,29 @@ export default function Calculator() {
     const [greenLight, setGreenLight] = useState(false);
     const [history, setHistory] = useState("");
 
+    /*  feed current history and inputs to screen */
     let result = currentOperation ? currentOperation : "";
-    const regexCalc = currentOperation.match(/\d+\.\d+|\d+|\-\d+|\d+|[^0-9]/g);
-    let lastOne = regexCalc ? regexCalc[regexCalc.length - 1] : null;
+    const regexCalc = currentOperation.match(/-\d+\.\d+|\d+\.\d+|\d+|-\d+|\d+|[^0-9]/g);
+    console.log(regexCalc, "REGEX CALC ARR")
+        /* negative number detection + operator
+        \d+\.\d+|\d+|\-\d+|\d+|[^0-9] 
+         */
+        /* negative detection and negative decimal  */
+        /* /-\d+\.\d+|\d+\.\d+|\d+|-\d+|\d+|[^0-9]/g */
+        /* need to detect negative with decimal aswell. */
+        /* normal operator detection 
+        \d+\.\d+|\d+|[^0-9]
+         */
 
-        console.warn(regexCalc)
+        /* feed last item of Array to Screen output screen */
+    let LastInput = regexCalc ? regexCalc[regexCalc.length - 1] : null;
+
+        console.warn(currentOperation, "current op", result, "result")
+        console.warn(LastInput, "LAST ONE")
+
+        /*  */
     if (currentOperation && currentOperation.includes("=")) {
-        /* detect negative \d+\.\d+|\d+|\-\d+|\d+|[^0-9] */
-        /* normal \d+\.\d+|\d+|[^0-9] */
+
 
         // if(result = operationOrder(regexCalc)) 
         result = operationOrder(regexCalc)
@@ -26,7 +41,7 @@ export default function Calculator() {
         
 
         
-        if (!Number.isInteger(result) && isNaN(result)) {
+        if (!Number.isInteger(result) ) {
             result = result.toFixed(2);
             const string = result.toString()
             if (string[string.length - 1] === "0") {
@@ -36,9 +51,9 @@ export default function Calculator() {
         }
 
         
-        console.log(lastOne, "LastOne")
+        console.log(LastInput, "LastInput")
 
-        if ((lastOne) === "=") {
+        if ((LastInput) === "=") {
             console.warn(currentOperation, "CURRENT OP BEFORE")
             setHistory(currentOperation)
             setGreenLight(true)
@@ -63,7 +78,7 @@ export default function Calculator() {
                 currentOperation={currentOperation}
                 setCurrentOperation={setCurrentOperation}
                 result={result}
-                lastOne={lastOne}
+                LastInput={LastInput}
                 history={history} />
 
             <Buttons
