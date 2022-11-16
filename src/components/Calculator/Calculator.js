@@ -19,7 +19,7 @@ export default function Calculator() {
          */
         /* negative detection and negative decimal  */
         /* /-\d+\.\d+|\d+\.\d+|\d+|-\d+|\d+|[^0-9]/g */
-        /* need to detect negative with decimal aswell. */
+
         /* normal operator detection 
         \d+\.\d+|\d+|[^0-9]
          */
@@ -37,8 +37,6 @@ export default function Calculator() {
         // if(result = operationOrder(regexCalc)) 
         result = operationOrder(regexCalc)
         console.log(result, "FUNC RESULT")
-
-        
 
         
         if (!Number.isInteger(result) ) {

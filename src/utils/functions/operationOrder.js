@@ -2,8 +2,7 @@
 
 export default function operationOrder(regexCalc) {
 
-
-    if (regexCalc.length == 1) return parseInt(regexCalc[0])
+    if (regexCalc.length === 1) return parseInt(regexCalc[0])
     if (!Array.isArray(regexCalc)) return regexCalc;
     if (!regexCalc.includes("=")) return regexCalc.toString();
 
@@ -16,18 +15,19 @@ export default function operationOrder(regexCalc) {
     let calculation
     for (let i = 0; i < arrCopy.length; i++) {
         if (arrCopy[i] === "*") {
-            let index = i;
-            calculation = parseFloat(arrCopy[index - 1]) * parseFloat(arrCopy[index + 1]);
-            arrCopy.splice(index - 1, 3, calculation)
+            
+            calculation = parseFloat(arrCopy[i - 1]) * parseFloat(arrCopy[i + 1]);
+            arrCopy.splice(i - 1, 3, calculation)
             if (arrCopy.includes(NaN)) return NaN
             console.log(arrCopy, "AFTER SPLICE")
             console.log(calculation, "CALCULATION *")
             return operationOrder(arrCopy);
         }
+
         if (arrCopy[i] === "/") {
-            let index = i;
-            calculation = parseFloat(arrCopy[index - 1]) / parseFloat(arrCopy[index + 1]);
-            arrCopy.splice(index - 1, 3, calculation);
+            
+            calculation = parseFloat(arrCopy[i - 1]) / parseFloat(arrCopy[i + 1]);
+            arrCopy.splice(i - 1, 3, calculation);
             if (arrCopy.includes(NaN)) return NaN
             console.log(arrCopy, "AFTER SPLICE")
             console.log(calculation, "CALCULATION /")
@@ -53,7 +53,7 @@ export default function operationOrder(regexCalc) {
 
             return operationOrder(arrCopy)
         }
-        if (arrCopy.length == 2 && arrCopy[1] === "=") {
+        if (arrCopy.length === 2 && arrCopy[1] === "=") {
             return parseFloat(arrCopy[0])
         }
     }
