@@ -12,39 +12,35 @@ export default function operationOrder(regexCalc) {
     const arrCopy = [...regexCalc]
     console.log(arrCopy, "ARR COPY")
 
+    /* re- do with loop to check from left to right for operators */
     let calculation
-    if (arrCopy.includes("*")) {
-        let index = arrCopy.indexOf("*")
-        calculation = parseFloat(arrCopy[index - 1]) * parseFloat(arrCopy[index + 1]);
-        arrCopy.splice(index - 1, 3, calculation)
-        if (arrCopy.includes(NaN)) return NaN
-        console.log(arrCopy, "AFTER SPLICE")
-        console.log(calculation, "CALCULATION *")
-        return operationOrder(arrCopy);
+    for (let i = 0; i < arrCopy.length; i++) {
+        if (arrCopy[i] === "*") {
+            let index = i;
+            calculation = parseFloat(arrCopy[index - 1]) * parseFloat(arrCopy[index + 1]);
+            arrCopy.splice(index - 1, 3, calculation)
+            if (arrCopy.includes(NaN)) return NaN
+            console.log(arrCopy, "AFTER SPLICE")
+            console.log(calculation, "CALCULATION *")
+            return operationOrder(arrCopy);
+        }
+        if (arrCopy[i] === "/") {
+            let index = i;
+            calculation = parseFloat(arrCopy[index - 1]) / parseFloat(arrCopy[index + 1]);
+            arrCopy.splice(index - 1, 3, calculation);
+            if (arrCopy.includes(NaN)) return NaN
+            console.log(arrCopy, "AFTER SPLICE")
+            console.log(calculation, "CALCULATION /")
+            return operationOrder(arrCopy);
+        }
     }
-    if (arrCopy.includes("/")) {
-        let index = arrCopy.indexOf("/")
-        calculation = parseFloat(arrCopy[index - 1]) / parseFloat(arrCopy[index + 1]);
-        arrCopy.splice(index - 1, 3, calculation);
-        if (arrCopy.includes(NaN)) return NaN
-        console.log(arrCopy, "AFTER SPLICE")
-        console.log(calculation, "CALCULATION /")
-        return operationOrder(arrCopy);
-    }
+
     if (arrCopy.includes("+")) {
         let index = arrCopy.indexOf("+")
         calculation = parseFloat(arrCopy[index - 1]) + parseFloat(arrCopy[index + 1]);
         arrCopy.splice(index - 1, 3, calculation);
-        if (arrCopy.includes(NaN)) return NaN /* only op here due to + operator bheiviour with strings and nums */
-        return operationOrder(arrCopy);
-    }
-    if (arrCopy.includes("-")) {
-        let index = arrCopy.indexOf("-")
-        calculation = parseFloat(arrCopy[index - 1]) - parseFloat(arrCopy[index + 1]);
-        arrCopy.splice(index - 1, 3, calculation.toString())
-        if (arrCopy.includes(NaN)) return NaN
-        console.log(arrCopy, "AFTER SPLICE")
-        console.log(calculation, "CALCULATION -")
+        if (arrCopy.includes(NaN)) return NaN; 
+        
         return operationOrder(arrCopy);
     }
 
@@ -63,43 +59,3 @@ export default function operationOrder(regexCalc) {
     }
     return calculation;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-    return calculation;
-*/
-
-
-
-
-
-
