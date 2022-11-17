@@ -16,9 +16,6 @@ export default function Screen({
         output = lastInput === "N" ? "NaN" : lastInput;
     }
 
-    console.warn({ result, output})
-
-
     return (
         <>
             <div className="formula-screen">{formula}</div>

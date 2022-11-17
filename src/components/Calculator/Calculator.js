@@ -21,8 +21,6 @@ export default function Calculator() {
         regexCalc ? regexCalc[regexCalc.length - 1] : null
     );
 
-    console.warn(currentOperation, "current op", result, "result")
-
 
     if (currentOperation && currentOperation.includes("=")) {
         result = operationOrder(regexCalc)

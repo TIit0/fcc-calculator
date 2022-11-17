@@ -21,8 +21,6 @@ export default function operationOrder(regexCalc) {
                 );
             arrCopy.splice(i - 1, 3, calculation)
             if (arrCopy.includes(NaN)) return NaN
-            console.log(arrCopy, "AFTER SPLICE")
-            console.log(calculation, "CALCULATION *")
             return operationOrder(arrCopy);
         }
 
@@ -65,7 +63,7 @@ export default function operationOrder(regexCalc) {
             return parseFloat(arrCopy[0])
         }
     }
-    
+
     calculation = (calculation === undefined) ? NaN : calculation;
     return calculation;
 }
