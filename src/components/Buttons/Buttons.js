@@ -23,16 +23,9 @@ function handleClick(e) {
             setHistory(e.target.value)
         return setCurrentOperation(e.target.value);
         } else {
-            
             setIsOverWrite(false);
-            setHistory(pastHistory => pastHistory + e.target.value);
-            
-            return setCurrentOperation( lastOperation => {
-                return lastOperation + e.target.value
-            });
         }
     }
-
     setHistory(pastHistory => pastHistory + e.target.value)
     setCurrentOperation( lastOperation => lastOperation + e.target.value)
 }
