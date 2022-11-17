@@ -1,32 +1,22 @@
 import "./Screen.css";
 
-export default function Screen({ currentOperation, result, setCurrentOperation, LastInput, history }) {
-
-    console.log(currentOperation, "SCREEN CURRENT OP")
-let output;
-console.log(Math.sign(currentOperation) == -1)
+export default function Screen({ currentOperation, result, LastInput, history }) {
 
     const formula = history ? history.replace("*", "x") : "0";
-    
-    
-        if(Math.sign(currentOperation) == -1) {
-            output = result;
-        } else {
-            output = LastInput === "N" ? "NaN" : LastInput;
-        }
-    
-        
-    
 
+    let output;
+    if (Math.sign(currentOperation) === -1) {
+        output = result;
+    } else {
+        output = result === "N" ? "NaN" : result;
+    }
 
-console.error(LastInput, "SCREEEEN")
+    console.warn({ result, output})
 
 
     return (
         <>
-            <div className="formula-screen">
-                {formula}
-            </div>
+            <div className="formula-screen">{formula}</div>
             <div className="output">{output ? output : "0"}</div>
         </>
     )

@@ -7,38 +7,24 @@ import operationOrder from "../../utils/functions/operationOrder";
 export default function Calculator() {
 
     const [currentOperation, setCurrentOperation] = useState("");
-    const [greenLight, setGreenLight] = useState(false);
+    const [isOverWrite, setIsOverWrite] = useState(false);
     const [history, setHistory] = useState("");
 
     /*  feed current history and inputs to screen */
     let result = currentOperation ? currentOperation : "";
-    const regexCalc = currentOperation.match(/-\d+\.\d+|\d+\.\d+|\d+|-\d+|\d+|[^0-9]/g);
-    console.log(regexCalc, "REGEX CALC ARR")
-        /* negative number detection + operator
-        \d+\.\d+|\d+|\-\d+|\d+|[^0-9] 
-         */
-        /* negative detection and negative decimal  */
-        /* /-\d+\.\d+|\d+\.\d+|\d+|-\d+|\d+|[^0-9]/g */
+    const regexCalc = 
+    currentOperation.match(/-\d+\.\d+|\d+\.\d+|\d+|-\d+|\d+|[^0-9]/g);
 
-        /* normal operator detection 
-        \d+\.\d+|\d+|[^0-9]
-         */
+    console.log(regexCalc, "REGEX CALC ARR", currentOperation, "Current OP")
 
-        /* feed last item of Array to Screen output screen */
-    let LastInput = regexCalc ? regexCalc[regexCalc.length - 1] : null;
 
         console.warn(currentOperation, "current op", result, "result")
-        console.warn(LastInput, "LAST ONE")
+        
 
-        /*  */
     if (currentOperation && currentOperation.includes("=")) {
 
-
-        // if(result = operationOrder(regexCalc)) 
         result = operationOrder(regexCalc)
         console.log(result, "FUNC RESULT")
-
-        
         if (!Number.isInteger(result) ) {
             result = result.toFixed(2);
             const string = result.toString()
@@ -48,14 +34,12 @@ export default function Calculator() {
             }
         }
 
-        
-        console.log(LastInput, "LastInput")
-
-        if ((LastInput) === "=") {
+        if ((regexCalc[regexCalc.length - 1]) === "=") {
             console.warn(currentOperation, "CURRENT OP BEFORE")
             setHistory(currentOperation)
-            setGreenLight(true)
+            setIsOverWrite(true)
             setCurrentOperation(result.toString());
+            
         }
         console.warn(currentOperation, "CURRENT OP AFTER")
         console.warn(history, "History AFTER")
@@ -66,24 +50,19 @@ export default function Calculator() {
         setHistory(currentOperation);
     }
 
-
-    console.error(result);
-    result = result ? result : "0";
-    console.error(result);
     return (
         <div className="Calculator">
             <Screen
                 currentOperation={currentOperation}
                 setCurrentOperation={setCurrentOperation}
                 result={result}
-                LastInput={LastInput}
                 history={history} />
 
             <Buttons
                 currentOperation={currentOperation}
                 setCurrentOperation={setCurrentOperation}
-                greenLight={greenLight}
-                setGreenLight={setGreenLight}
+                isOverWrite={isOverWrite}
+                setIsOverWrite={setIsOverWrite}
                 setHistory={setHistory} />
         </div>
     )

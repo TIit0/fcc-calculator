@@ -155,3 +155,15 @@ export default function operationOrder(regexCalc) {
     }
     return calculation;
 } */
+
+/*    REGEX SCRAP     */
+
+/* negative number detection + operator
+        \d+\.\d+|\d+|\-\d+|\d+|[^0-9] 
+         */
+        /* negative detection and negative decimal  */
+        /* /-\d+\.\d+|\d+\.\d+|\d+|-\d+|\d+|[^0-9]/g */
+
+        /* normal operator detection 
+        \d+\.\d+|\d+|[^0-9]
+         */
