@@ -1,6 +1,11 @@
 import "./Screen.css";
 
-export default function Screen({ currentOperation, result, LastInput, history }) {
+export default function Screen({
+    currentOperation,
+    result,
+    history,
+    lastInput 
+}) {
 
     const formula = history ? history.replace("*", "x") : "0";
 
@@ -8,7 +13,7 @@ export default function Screen({ currentOperation, result, LastInput, history })
     if (Math.sign(currentOperation) === -1) {
         output = result;
     } else {
-        output = result === "N" ? "NaN" : result;
+        output = lastInput === "N" ? "NaN" : lastInput;
     }
 
     console.warn({ result, output})

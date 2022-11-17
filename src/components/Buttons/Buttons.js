@@ -1,11 +1,16 @@
 import "./Buttons.css";
 import buttonArr from "../../utils/data/buttonArr.json"
 
-export default function Buttons({setCurrentOperation, currentOperation,isOverWrite, setIsOverWrite, setHistory}) {
+export default function Buttons({
+    setCurrentOperation,
+    currentOperation,
+    isOverWrite,
+    setIsOverWrite,
+    setHistory
+}) {
 
 
 function handleClick(e) {
-
     if (isNaN(e.target.value) && 
     e.target.value === currentOperation[currentOperation.length - 1]) {
         return
@@ -29,6 +34,7 @@ function handleClick(e) {
     setHistory(pastHistory => pastHistory + e.target.value)
     setCurrentOperation( lastOperation => lastOperation + e.target.value)
 }
+
     return (
         <div className="button-grid">
             {buttonArr.map( button => {

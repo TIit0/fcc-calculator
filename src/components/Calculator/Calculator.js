@@ -10,22 +10,25 @@ export default function Calculator() {
     const [isOverWrite, setIsOverWrite] = useState(false);
     const [history, setHistory] = useState("");
 
-    /*  feed current history and inputs to screen */
+
     let result = currentOperation ? currentOperation : "";
-    const regexCalc = 
-    currentOperation.match(/-\d+\.\d+|\d+\.\d+|\d+|-\d+|\d+|[^0-9]/g);
 
-    console.log(regexCalc, "REGEX CALC ARR", currentOperation, "Current OP")
+    const regexCalc = (
+        currentOperation.match(/-\d+\.\d+|\d+\.\d+|\d+|-\d+|\d+|[^0-9]/g)
+    );
 
+    const lastInput = (
+        regexCalc ? regexCalc[regexCalc.length - 1] : null
+    );
 
-        console.warn(currentOperation, "current op", result, "result")
-        
+    console.warn(currentOperation, "current op", result, "result")
+
 
     if (currentOperation && currentOperation.includes("=")) {
-
         result = operationOrder(regexCalc)
-        console.log(result, "FUNC RESULT")
-        if (!Number.isInteger(result) ) {
+
+
+        if (!Number.isInteger(result)) {
             result = result.toFixed(2);
             const string = result.toString()
             if (string[string.length - 1] === "0") {
@@ -34,21 +37,22 @@ export default function Calculator() {
             }
         }
 
-        if ((regexCalc[regexCalc.length - 1]) === "=") {
+        if ((lastInput) === "=") {
             console.warn(currentOperation, "CURRENT OP BEFORE")
             setHistory(currentOperation)
             setIsOverWrite(true)
             setCurrentOperation(result.toString());
-            
+
         }
         console.warn(currentOperation, "CURRENT OP AFTER")
         console.warn(history, "History AFTER")
     }
 
-    
+
     if (history[history.length - 2] === "=") {
         setHistory(currentOperation);
     }
+
 
     return (
         <div className="Calculator">
@@ -56,6 +60,7 @@ export default function Calculator() {
                 currentOperation={currentOperation}
                 setCurrentOperation={setCurrentOperation}
                 result={result}
+                lastInput={lastInput}
                 history={history} />
 
             <Buttons
