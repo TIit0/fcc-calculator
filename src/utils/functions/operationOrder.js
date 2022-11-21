@@ -31,8 +31,6 @@ export default function operationOrder(regexCalc) {
                 );
             arrCopy.splice(i - 1, 3, calculation);
             if (arrCopy.includes(NaN)) return NaN
-            console.log(arrCopy, "AFTER SPLICE")
-            console.log(calculation, "CALCULATION /")
             return operationOrder(arrCopy);
         }
     }
@@ -47,8 +45,6 @@ export default function operationOrder(regexCalc) {
         
         return operationOrder(arrCopy);
     }
-
-    console.error("before loop")
     /*  handle negative numbers that do not have an opertor ie 1 -1 or -1 1   */
     for (let i = 0; i < arrCopy.length; i++) {
         if (!isNaN(arrCopy[i]) && !isNaN(arrCopy[i + 1])) {

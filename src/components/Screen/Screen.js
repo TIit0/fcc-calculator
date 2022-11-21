@@ -8,6 +8,7 @@ export default function Screen({
 }) {
 
     const formula = history ? history.replace("*", "x") : "0";
+    lastInput = lastInput ? lastInput.replace("*", "x") : "0";
 
     let output;
     if (Math.sign(currentOperation) === -1) {
