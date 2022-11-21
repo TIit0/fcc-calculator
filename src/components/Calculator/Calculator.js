@@ -36,14 +36,11 @@ export default function Calculator() {
         }
 
         if ((lastInput) === "=") {
-            console.warn(currentOperation, "CURRENT OP BEFORE")
             setHistory(currentOperation)
             setIsOverWrite(true)
             setCurrentOperation(result.toString());
 
         }
-        console.warn(currentOperation, "CURRENT OP AFTER")
-        console.warn(history, "History AFTER")
     }
 
 

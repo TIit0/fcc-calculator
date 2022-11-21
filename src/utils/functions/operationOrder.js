@@ -9,7 +9,7 @@ export default function operationOrder(regexCalc) {
 
 
     const arrCopy = [...regexCalc]
-    console.log(arrCopy, "ARR COPY")
+    // console.log(arrCopy, "ARR COPY")
 
     /* re- do with loop to check from left to right for operators */
     let calculation
