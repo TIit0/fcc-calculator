@@ -29,3 +29,10 @@
     text-align: end;
     font-family: digital;
 }
+
+@media only screen and (max-width: 25em) {
+
+  .formula-screen {height: 2rem;}
+  .output {height: 3rem;}
+  
+}
