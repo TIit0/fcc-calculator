@@ -23,4 +23,4 @@ export default function Screen({
             <div className="output">{output ? output : "0"}</div>
         </>
     )
-}
+} 
